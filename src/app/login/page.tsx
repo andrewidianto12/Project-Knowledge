@@ -7,8 +7,8 @@ import Link from "next/link";
 export default function LoginPage() {
     const router = useRouter();
 
-    const [email, setEmail] = useState("andre@gmail.com");
-    const [password, setPassword] = useState("admin1234");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
@@ -44,12 +44,14 @@ export default function LoginPage() {
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
             <div className="w-full max-w-md rounded-lg bg-white p-8 shadow">
-                <h1 className="mb-1 text-2xl font-semibold text-gray-900">
-                    Login
-                </h1>
-                <p className="mb-6 text-sm text-gray-600">
-                    Knowledge Management System
-                </p>
+                <div className="mb-6 text-center">
+                    <h1 className="mb-1 text-2xl font-semibold text-gray-900">
+                        Login
+                    </h1>
+                    <p className="text-sm text-gray-600">
+                        Knowledge Management System
+                    </p>
+                </div>
 
                 <form onSubmit={onSubmit} className="space-y-4">
                     <div>
@@ -93,15 +95,15 @@ export default function LoginPage() {
                     </button>
 
                 </form>
-                <div className="text-center mt-4">
+                <div className="text-center mt-6">
                     <span className="text-sm text-gray-600">
-                        Don’t have an account?
+                        Belum punya akun?
                     </span>{" "}
                     <Link
                         href="/register"
                         className="text-sm font-semibold text-blue-600 hover:underline"
                     >
-                        Create account
+                        Daftar di sini
                     </Link>
                 </div>
             </div>
