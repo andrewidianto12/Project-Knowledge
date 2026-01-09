@@ -2,12 +2,13 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function LoginPage() {
     const router = useRouter();
 
-    const [email, setEmail] = useState("admin@kms.com");
-    const [password, setPassword] = useState("admin123");
+    const [email, setEmail] = useState("andre@gmail.com");
+    const [password, setPassword] = useState("admin1234");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
@@ -30,7 +31,8 @@ export default function LoginPage() {
                 return;
             }
 
-            router.push("/");
+            localStorage.setItem("user", JSON.stringify(data.user));
+            router.push("/dashboard");
         } catch (err) {
             console.error("login error:", err);
             setError("Server tidak bisa dihubungi");
@@ -89,7 +91,19 @@ export default function LoginPage() {
                     >
                         {loading ? "Signing in..." : "Sign in"}
                     </button>
+
                 </form>
+                <div className="text-center mt-4">
+                    <span className="text-sm text-gray-600">
+                        Don’t have an account?
+                    </span>{" "}
+                    <Link
+                        href="/register"
+                        className="text-sm font-semibold text-blue-600 hover:underline"
+                    >
+                        Create account
+                    </Link>
+                </div>
             </div>
         </div>
     );
