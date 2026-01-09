@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 type User = {
     id: number;
     email: string;
+    role: number;
 };
 
 export default function DashboardPage() {
@@ -94,12 +95,34 @@ export default function DashboardPage() {
                     </div>
                 </div>
 
+                {/* Admin Menu */}
+                {user?.role === 2 && (
+                    <div className="mt-12">
+                        <h2 className="text-xl font-semibold text-gray-900 mb-4">Menu Admin</h2>
+                        <div className="grid gap-6 md:grid-cols-3">
+                            {/* Card: User Management */}
+                            <div
+                                onClick={() => router.push("/admin/users")}
+                                className="rounded-lg bg-gradient-to-br from-purple-500 to-purple-600 p-6 shadow hover:shadow-lg transition-shadow cursor-pointer"
+                            >
+                                <div className="mb-4 flex items-center justify-center h-12 w-12 rounded-md bg-white bg-opacity-20 text-white">
+                                    <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                                    </svg>
+                                </div>
+                                <h3 className="text-lg font-medium text-white">User Management</h3>
+                                <p className="mt-2 text-sm text-purple-100">Kelola semua user</p>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
                 {/* Welcome Section */}
                 <div className="mt-12 rounded-lg bg-white p-8 shadow">
                     <h2 className="text-xl font-semibold text-gray-900 mb-4">
                         Selamat datang, {user?.email}! 👋
                     </h2>
-                    <p className="text-gray-600 mb-4">
+                    <p className="text-gray-600">
                         Anda telah berhasil login ke Knowledge Management System. Gunakan menu di atas untuk mulai mengelola dokumen dan pengetahuan.
                     </p>
                 </div>

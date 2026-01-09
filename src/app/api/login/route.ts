@@ -8,6 +8,7 @@ type UserRow = RowDataPacket & {
     id: number;
     email: string;
     password: string;
+    role: number;
 };
 
 export async function POST(req: Request) {
@@ -27,7 +28,7 @@ export async function POST(req: Request) {
         }
 
         const [rows] = await pool.execute<UserRow[]>(
-            "SELECT id, email, password FROM users WHERE email = ? LIMIT 1",
+            "SELECT id, email, password, role FROM users WHERE email = ? LIMIT 1",
             [email]
         );
 
@@ -52,6 +53,7 @@ export async function POST(req: Request) {
             user: {
                 id: user.id,
                 email: user.email,
+                role: user.role,
             },
         });
     } catch (err) {
