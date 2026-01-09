@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 
-export default function EditUserPage() {
+function EditUserForm() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const rawId = searchParams.get("id");
@@ -143,5 +143,17 @@ export default function EditUserPage() {
                 </div>
             </main>
         </div>
+    );
+}
+
+export default function EditUserPage() {
+    return (
+        <Suspense fallback={
+            <div className="flex h-screen items-center justify-center bg-gray-50">
+                <p className="text-gray-600">Loading...</p>
+            </div>
+        }>
+            <EditUserForm />
+        </Suspense>
     );
 }
