@@ -13,10 +13,11 @@ type UserRow = RowDataPacket & {
 
 export async function GET(
     _req: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
-        const userId = parseInt(params.id, 10);
+        const { id } = await params;
+        const userId = parseInt(id, 10);
 
         if (isNaN(userId)) {
             return NextResponse.json(
@@ -57,10 +58,11 @@ export async function GET(
 
 export async function PUT(
     req: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
-        const userId = parseInt(params.id, 10);
+        const { id } = await params;
+        const userId = parseInt(id, 10);
 
         if (isNaN(userId)) {
             return NextResponse.json(
@@ -149,10 +151,11 @@ export async function PUT(
 
 export async function DELETE(
     _req: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
-        const userId = parseInt(params.id, 10);
+        const { id } = await params;
+        const userId = parseInt(id, 10);
 
         if (isNaN(userId)) {
             return NextResponse.json(
